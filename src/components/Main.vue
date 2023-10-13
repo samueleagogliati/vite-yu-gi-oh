@@ -46,7 +46,7 @@ export default{
     </select>
     <div class="p-4 container bg-white h-100 pb-0">
       <div v-if="show" id="loading-message" class="d-flex justify-content-center mb-1 align-items-center" >
-        <span class="spinner-border" role="status"></span>
+        <span class="spinner-grow" role="status"></span>
         <h3 class="text-black loading">Loading...</h3>
       </div>
       <div class="row black-bar bg-black" v-if="!show">
@@ -78,7 +78,7 @@ main{
   }
   .container{
     min-height: 100vh;
-    .spinner-border{
+    .spinner-grow{
       width: 50px;
       height: 50px;
     }
