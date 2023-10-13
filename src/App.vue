@@ -19,26 +19,39 @@ export default{
   },
   methods:{
     getApi(){
+      console.log(store.selectedArchetype);
+      if(store.selectedArchetype==="All cards"){
+        store.apiUrl='https://db.ygoprodeck.com/api/v7/cardinfo.php?';
+        this.show=true;
+      }
+      if(store.selectedArchetype!=""&&store.selectedArchetype!="All cards"){
+        store.apiUrl='https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype='+store.selectedArchetype;
+      }
       axios.get(store.apiUrl)
         .then( res =>{
           store.object = res.data.data;
-          for(let i=0; i<res.data.data.length; i++){
-            if (!store.optionList.includes(res.data.data[i].archetype)) {
-              if(res.data.data[i].archetype){
-                store.optionList.push(res.data.data[i].archetype);
-              }
-            }
-          }
           this.show=false;
         })
         .catch(err => {
           console.log(err);
         })
-
+    },
+    pushOptionList(){
+      axios.get(store.apiOptionUrl)
+        .then(res =>{
+          for(let i=0; i<res.data.length;i++){
+            store.optionList.push(res.data[i].archetype_name);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
+
   },
   mounted(){
     this.getApi();
+    this.pushOptionList();
   }
 
 }
@@ -48,7 +61,7 @@ export default{
 
 <template>
    <Header></Header>
-    <Main :show="show"></Main>
+    <Main :show="show" @search="getApi"></Main>
 </template>
 
 <style lang="scss">

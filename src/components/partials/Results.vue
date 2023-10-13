@@ -8,22 +8,13 @@
 
             }
         },
-        props:{
-            archetypeSelected: String
-        },
         computed:{
             outputResult(){
-                if(this.archetypeSelected==="All cards"){
-                    return "Found " + store.object.length + " Cards";
+                if(store.object.length==1){
+                    return "Found 1 Card"
                 }
                 else{
-                    const obj = store.object.filter(item => item.archetype === this.archetypeSelected);
-                    if(obj.length==1){
-                        return "Found " + obj.length + " Card";
-                    }
-                    else{
-                        return "Found " + obj.length + " Cards";
-                    }
+                    return "Found "+store.object.length +" Cards";
                 }
             }
         }

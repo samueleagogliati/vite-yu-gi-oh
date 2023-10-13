@@ -12,26 +12,11 @@ export default{
   },
   data(){
     return{
-      store,
-      archetypeSelected: "All cards",
+      store
     }
   },
   props:{
     show: Boolean
-  },
-  methods:{
-    gestioneSelect(){
-      const index = document.querySelector(".form-select").options.selectedIndex;
-      const archeotype = document.getElementsByTagName("option")[index].textContent;
-      this.archetypeSelected = archeotype;
-    }
-  },
-  computed:{
-    filteredCards() {
-      if(this.archetypeSelected==="All cards")
-        return this.store.object;
-      return this.store.object.filter(item => item.archetype === this.archetypeSelected);
-    }
   }
 }
 
@@ -40,7 +25,7 @@ export default{
 <template>
 
   <main class="pt-3">
-    <select class="form-select mb-3" aria-label="select" @change="gestioneSelect">
+    <select class="form-select mb-3" aria-label="select" v-model="store.selectedArchetype" @change="$emit('search')">
       <option selected>All cards</option>
       <option v-for="(o, index) in store.optionList" :key="index">{{ o }}</option>
     </select>
@@ -50,10 +35,10 @@ export default{
         <h3 class="text-black loading">Loading...</h3>
       </div>
       <div class="row black-bar bg-black" v-if="!show">
-        <Results :archetypeSelected="archetypeSelected"></Results>
+        <Results></Results>
       </div>
-      <div class="row">
-        <Card v-for="item in filteredCards" 
+      <div class="row" v-show="!show">
+        <Card v-for="item in store.object" 
           :key="item.id" 
           :image="item.card_images[0].image_url"
           :title="item.name" 

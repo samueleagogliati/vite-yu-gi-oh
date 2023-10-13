@@ -4,5 +4,8 @@ import { reactive } from 'vue';
 export const store = reactive({
   apiUrl: 'https://db.ygoprodeck.com/api/v7/cardinfo.php?',
   object: [],
-  optionList: []
+  optionList: [],
+  apiOptionUrl: 'https://db.ygoprodeck.com/api/v7/archetypes.php',
+  selectedArchetype: ""
+
 })
