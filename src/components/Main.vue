@@ -13,8 +13,11 @@ export default{
   data(){
     return{
       store,
-      archetypeSelected: "All cards"
+      archetypeSelected: "All cards",
     }
+  },
+  props:{
+    show: Boolean
   },
   methods:{
     gestioneSelect(){
@@ -41,8 +44,12 @@ export default{
       <option selected>All cards</option>
       <option v-for="(o, index) in store.optionList" :key="index">{{ o }}</option>
     </select>
-    <div class="p-5 container bg-white h-100 pb-0">
-      <div class="row black-bar bg-black">
+    <div class="p-4 container bg-white h-100 pb-0">
+      <div v-if="show" id="loading-message" class="d-flex justify-content-center mb-1 align-items-center" >
+        <span class="spinner-border" role="status"></span>
+        <h3 class="text-black loading">Loading...</h3>
+      </div>
+      <div class="row black-bar bg-black" v-if="!show">
         <Results :archetypeSelected="archetypeSelected"></Results>
       </div>
       <div class="row">
@@ -50,7 +57,8 @@ export default{
           :key="item.id" 
           :image="item.card_images[0].image_url"
           :title="item.name" 
-          :text="item.archetype">
+          :text="item.archetype"
+          >
         </Card>      
       </div>
     </div>
@@ -65,10 +73,18 @@ export default{
 main{
   background-color: $bg-color;
   select{
-    width: 150px;
+    width: 200px;
     margin-left: 70px;
   }
   .container{
+    min-height: 100vh;
+    .spinner-border{
+      width: 50px;
+      height: 50px;
+    }
+    .loading{
+      margin-left: 20px;
+    }
     .black-bar{
       height: 40px;
       margin: 0 1px;

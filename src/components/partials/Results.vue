@@ -18,7 +18,12 @@
                 }
                 else{
                     const obj = store.object.filter(item => item.archetype === this.archetypeSelected);
-                    return "Found " + obj.length + " Cards";
+                    if(obj.length==1){
+                        return "Found " + obj.length + " Card";
+                    }
+                    else{
+                        return "Found " + obj.length + " Cards";
+                    }
                 }
             }
         }

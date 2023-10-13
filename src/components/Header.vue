@@ -12,7 +12,7 @@ export default{
   <header>
     <div class="align-items-center h-100 d-flex ">
       <img src="logo.jpeg" alt="logo">
-      <h1 class="text-black ms-2">Yu-Gi-Oh Api</h1>
+      <h1 class="text-black ms-2">Yu-Gi-Oh Cards</h1>
     </div>
 
     

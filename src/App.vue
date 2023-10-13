@@ -13,7 +13,8 @@ export default{
   },
   data(){
     return{
-      store
+      store,
+      show: true
     }
   },
   methods:{
@@ -21,7 +22,6 @@ export default{
       axios.get(store.apiUrl)
         .then( res =>{
           store.object = res.data.data;
-          console.log(store.object[0].card_images[0].image_url);
           for(let i=0; i<res.data.data.length; i++){
             if (!store.optionList.includes(res.data.data[i].archetype)) {
               if(res.data.data[i].archetype){
@@ -29,9 +29,7 @@ export default{
               }
             }
           }
-        console.log(store.optionList);
-          
-          
+          this.show=false;
         })
         .catch(err => {
           console.log(err);
@@ -50,7 +48,7 @@ export default{
 
 <template>
    <Header></Header>
-    <Main></Main>
+    <Main :show="show"></Main>
 </template>
 
 <style lang="scss">

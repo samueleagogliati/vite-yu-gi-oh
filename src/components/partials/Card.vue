@@ -19,9 +19,10 @@ export default{
 <template>
 
   <div class="col1">
-    <div class="card mb-2">
+    <div class="card mb-3">
       <img :src="getImagePath(image)" alt="">
-      <div class="card-body">
+      <!-- Ho messo d-none in card-body perché così è più carino -->
+      <div class="card-body d-none">
         <h1 class="card-title text-center text-white">{{ title }}</h1>
         <p class="card-text text-center">{{text}}</p>
       </div>
